@@ -15,6 +15,7 @@
         public static readonly string SendPrivateMessage = "sendPrivateMessage";
         public static readonly string SetTyping = "setTyping";
         public static readonly string JoinRoom = "joinRoom";
+        public static readonly string RoomCreated = "roomCreated";
         public static readonly string GravatarChanged = "changeGravatar";
         public static readonly string MeMessageReceived = "sendMeMessage";
         public static readonly string UsernameChanged = "changeUserName";
