@@ -46,11 +46,11 @@ namespace JabbR.Client
             {
                 if (t.IsFaulted)
                 {
-                    tcs.SetException(t.Exception);
+                    tcs.TrySetException(t.Exception);
                 }
                 else if (t.IsCanceled)
                 {
-                    tcs.SetCanceled();
+                    tcs.TrySetCanceled();
                 }
             },
             TaskContinuationOptions.NotOnRanToCompletion);
@@ -62,11 +62,11 @@ namespace JabbR.Client
             {
                 if (t.IsFaulted)
                 {
-                    tcs.SetException(t.Exception);
+                    tcs.TrySetException(t.Exception);
                 }
                 else if (t.IsCanceled)
                 {
-                    tcs.SetCanceled();
+                    tcs.TrySetCanceled();
                 }
             },
             TaskContinuationOptions.NotOnRanToCompletion);
@@ -78,15 +78,15 @@ namespace JabbR.Client
             {
                 if (t.IsFaulted)
                 {
-                    tcs.SetException(t.Exception);
+                    tcs.TrySetException(t.Exception);
                 }
                 else if (t.IsCanceled)
                 {
-                    tcs.SetCanceled();
+                    tcs.TrySetCanceled();
                 }
                 else
                 {
-                    tcs.SetResult(null);
+                    tcs.TrySetResult(null);
                 }
             });
         }
@@ -161,18 +161,18 @@ namespace JabbR.Client
                 var faulted = completedTasks.FirstOrDefault(t => t.IsFaulted);
                 if (faulted != null)
                 {
-                    tcs.SetException(faulted.Exception);
+                    tcs.TrySetException(faulted.Exception);
                     return;
                 }
                 var cancelled = completedTasks.FirstOrDefault(t => t.IsCanceled);
                 if (cancelled != null)
                 {
-                    tcs.SetCanceled();
+                    tcs.TrySetCanceled();
                     return;
                 }
 
                 successor();
-                tcs.SetResult(null);
+                tcs.TrySetResult(null);
             });
 
             return tcs.Task;
@@ -532,7 +532,7 @@ namespace JabbR.Client
         public static Task<T> FromResult<T>(T value)
         {
             var tcs = new TaskCompletionSource<T>();
-            tcs.SetResult(value);
+            tcs.TrySetResult(value);
             return tcs.Task;
         }
 
@@ -557,28 +557,28 @@ namespace JabbR.Client
         internal static Task FromError(Exception e)
         {
             var tcs = new TaskCompletionSource<object>();
-            tcs.SetException(e);
+            tcs.TrySetException(e);
             return tcs.Task;
         }
 
         internal static Task<T> FromError<T>(Exception e)
         {
             var tcs = new TaskCompletionSource<T>();
-            tcs.SetException(e);
+            tcs.TrySetException(e);
             return tcs.Task;
         }
 
         private static Task Canceled()
         {
             var tcs = new TaskCompletionSource<object>();
-            tcs.SetCanceled();
+            tcs.TrySetCanceled();
             return tcs.Task;
         }
 
         private static Task<T> Canceled<T>()
         {
             var tcs = new TaskCompletionSource<T>();
-            tcs.SetCanceled();
+            tcs.TrySetCanceled();
             return tcs.Task;
         }
 
@@ -595,22 +595,22 @@ namespace JabbR.Client
             {
                 if (t.IsFaulted)
                 {
-                    tcs.SetException(t.Exception);
+                    tcs.TrySetException(t.Exception);
                 }
                 else if (t.IsCanceled)
                 {
-                    tcs.SetCanceled();
+                    tcs.TrySetCanceled();
                 }
                 else
                 {
                     try
                     {
                         successor();
-                        tcs.SetResult(null);
+                        tcs.TrySetResult(null);
                     }
                     catch (Exception ex)
                     {
-                        tcs.SetException(ex);
+                        tcs.TrySetException(ex);
                     }
                 }
             });
@@ -627,22 +627,22 @@ namespace JabbR.Client
                 {
                     if (t.IsFaulted)
                     {
-                        tcs.SetException(t.Exception);
+                        tcs.TrySetException(t.Exception);
                     }
                     else if (t.IsCanceled)
                     {
-                        tcs.SetCanceled();
+                        tcs.TrySetCanceled();
                     }
                     else
                     {
                         try
                         {
                             successor(t.Result);
-                            tcs.SetResult(null);
+                            tcs.TrySetResult(null);
                         }
                         catch (Exception ex)
                         {
-                            tcs.SetException(ex);
+                            tcs.TrySetException(ex);
                         }
                     }
                 });
@@ -657,21 +657,21 @@ namespace JabbR.Client
                 {
                     if (t.IsFaulted)
                     {
-                        tcs.SetException(t.Exception);
+                        tcs.TrySetException(t.Exception);
                     }
                     else if (t.IsCanceled)
                     {
-                        tcs.SetCanceled();
+                        tcs.TrySetCanceled();
                     }
                     else
                     {
                         try
                         {
-                            tcs.SetResult(successor());
+                            tcs.TrySetResult(successor());
                         }
                         catch (Exception ex)
                         {
-                            tcs.SetException(ex);
+                            tcs.TrySetException(ex);
                         }
                     }
                 });
@@ -686,21 +686,21 @@ namespace JabbR.Client
                 {
                     if (task.IsFaulted)
                     {
-                        tcs.SetException(t.Exception);
+                        tcs.TrySetException(t.Exception);
                     }
                     else if (task.IsCanceled)
                     {
-                        tcs.SetCanceled();
+                        tcs.TrySetCanceled();
                     }
                     else
                     {
                         try
                         {
-                            tcs.SetResult(successor(t));
+                            tcs.TrySetResult(successor(t));
                         }
                         catch (Exception ex)
                         {
-                            tcs.SetException(ex);
+                            tcs.TrySetException(ex);
                         }
                     }
                 });
