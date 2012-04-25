@@ -6,3 +6,5 @@
 packages/
 msbuild.log
 _Resharper*/
+
+*.ncrunchsolution
