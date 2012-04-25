@@ -9,7 +9,7 @@ namespace JabbR.Client.Sample
         static void Main(string[] args)
         {
             string server = "http://jabbr-staging.apphb.com/";
-            string roomName = "clienttest";
+            string roomName = "test";
             string userName = "testclient";
             string password = "password";
 
@@ -62,7 +62,7 @@ namespace JabbR.Client.Sample
                 Console.WriteLine(myInfo.Country);
 
                 
-                client.JoinRoom("test");
+                client.JoinRoom(roomName);
 
                 Console.WriteLine();
 
