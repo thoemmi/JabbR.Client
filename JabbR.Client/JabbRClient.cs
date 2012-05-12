@@ -173,6 +173,23 @@ namespace JabbR.Client
             return _chat.Invoke<bool>("Send", message, roomName);
         }
 
+        public Task CreateRoom(string roomName)
+        {
+            var tcs = new TaskCompletionSource<object>();
+
+            IDisposable createRoom = null;
+
+            createRoom = _chat.On<Room>(ClientEvents.RoomCreated, room =>
+            {
+                createRoom.Dispose();
+                tcs.SetResult(null);
+            });
+
+            SendCommand("create {0}", roomName).ContinueWithNotComplete(tcs);
+
+            return tcs.Task;
+        }
+
         public Task JoinRoom(string roomName)
         {
             var tcs = new TaskCompletionSource<object>();
