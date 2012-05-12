@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using JabbR.Client.Models;
+using SignalR.Client.Http;
 using SignalR.Client.Hubs;
 using SignalR.Client.Transports;
 
@@ -25,8 +26,8 @@ namespace JabbR.Client
         {
             _url = url;
             _connection = new HubConnection(url);
-            _chat = _connection.CreateProxy("JabbR.Chat");
-            _clientTransport = transport ?? new AutoTransport();
+            _chat = _connection.CreateProxy("chat");
+            _clientTransport = transport ?? new AutoTransport(new DefaultHttpClient());
         }
 
         public event Action<Message, string> MessageReceived;
