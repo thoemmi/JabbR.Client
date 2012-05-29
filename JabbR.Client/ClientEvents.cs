@@ -3,6 +3,7 @@
     public static class ClientEvents
     {
         public static readonly string AddMessage = "addMessage";
+        public static readonly string AddMessageContent = "addMessageContent";
         public static readonly string AddUser = "addUser";
         public static readonly string Leave = "leave";
         public static readonly string LogOn = "logOn";
