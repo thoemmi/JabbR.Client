@@ -173,6 +173,11 @@ namespace JabbR.Client
             return _chat.Invoke<bool>("Send", message, roomName);
         }
 
+        public Task<bool> Send(ClientMessage message)
+        {
+            return _chat.Invoke<bool>("Send", message);
+        }
+
         public Task CreateRoom(string roomName)
         {
             var tcs = new TaskCompletionSource<object>();
