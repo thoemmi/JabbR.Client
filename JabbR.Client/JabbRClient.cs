@@ -417,11 +417,11 @@ namespace JabbR.Client
 
             Action<User, string> flagChanged = FlagChanged;
 
-            if (noteChanged != null)
+            if (flagChanged != null)
             {
-                _chat.On<User, string>(ClientEvents.NoteChanged, (user, room) =>
+                _chat.On<User, string>(ClientEvents.FlagChanged, (user, room) =>
                 {
-                    Execute(() => noteChanged(user, room));
+                    Execute(() => flagChanged(user, room));
                 });
             }
 
