@@ -46,6 +46,7 @@ namespace JabbR.Client
         public event Action<User, string> OwnerAdded;
         public event Action<User, string> OwnerRemoved;
         public event Action<string, string, string> AddMessageContent;
+        public event Action<Room> JoinedRoom;
 
         // Global
         public event Action<Room, int> RoomCountChanged;
@@ -468,6 +469,16 @@ namespace JabbR.Client
                 _chat.On<string, string, string>(ClientEvents.AddMessageContent, (messageId, extractedContent, roomName) =>
                 {
                     Execute(() => addMessageContent(messageId, extractedContent, roomName));
+                });
+            }
+
+            Action<Room> joinedRoom = JoinedRoom;
+
+            if (joinedRoom != null)
+            {
+                _chat.On<Room>(ClientEvents.JoinRoom, (room) =>
+                {
+                    Execute(() => joinedRoom(room));
                 });
             }
         }
