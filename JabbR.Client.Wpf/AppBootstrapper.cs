@@ -1,14 +1,15 @@
-﻿namespace JabbR.Wpf
-{
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel.Composition;
-	using System.ComponentModel.Composition.Hosting;
-	using System.ComponentModel.Composition.Primitives;
-	using System.Linq;
-	using Caliburn.Micro;
+﻿using JabbR.Client.Wpf.Shell;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Primitives;
+using System.Linq;
+using Caliburn.Micro;
 
-	public class AppBootstrapper : Bootstrapper<IShell>
+namespace JabbR.Client.Wpf
+{
+    public class AppBootstrapper : Bootstrapper<IShell>
 	{
 		CompositionContainer container;
 

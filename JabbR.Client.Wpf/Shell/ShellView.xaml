@@ -1,4 +1,4 @@
-﻿<Window x:Class="JabbR.Wpf.ShellView"
+﻿<Window x:Class="JabbR.Client.Wpf.Shell.ShellView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
