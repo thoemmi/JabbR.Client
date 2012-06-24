@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using JabbR.Client.Models;
 using JabbR.Client.Wpf.Mdi;
@@ -7,7 +6,6 @@ using JabbR.Client.Wpf.Room;
 using JabbR.Client.Wpf.TitleBar;
 
 namespace JabbR.Client.Wpf.Shell {
-    [Export(typeof(IShell))]
     public class ShellViewModel : Conductor<IScreen>, IShell {
         private readonly TitleBarViewModel _titleBar;
         private readonly MdiViewModel _mdi;
@@ -17,7 +15,6 @@ namespace JabbR.Client.Wpf.Shell {
         private const string USERNAME = "testclient";
         private const string PASSWORD = "password";
 
-        [ImportingConstructor]
         public ShellViewModel(TitleBarViewModel titleBar, MdiViewModel mdi) {
             _titleBar = titleBar;
             _mdi = mdi;

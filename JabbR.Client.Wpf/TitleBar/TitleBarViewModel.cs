@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.Composition;
-
-namespace JabbR.Client.Wpf.TitleBar {
-    [Export]
+﻿namespace JabbR.Client.Wpf.TitleBar {
     public class TitleBarViewModel {
-         
     }
 }
