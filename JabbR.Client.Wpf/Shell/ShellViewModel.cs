@@ -8,7 +8,7 @@ using JabbR.Client.Wpf.TitleBar;
 using Message = JabbR.Client.Models.Message;
 
 namespace JabbR.Client.Wpf.Shell {
-    public class ShellViewModel : Conductor<IScreen>, IShell {
+    public class ShellViewModel : Conductor<IScreen> {
         private readonly TitleBarViewModel _titleBar;
         private readonly MdiViewModel _mdi;
         private readonly IEventAggregator _eventAggregator;

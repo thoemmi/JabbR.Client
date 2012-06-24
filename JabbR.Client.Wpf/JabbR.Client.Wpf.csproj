@@ -79,7 +79,6 @@
     <Compile Include="Infrastructure\DragMoveWindowBehavior.cs" />
     <Compile Include="Mdi\MdiViewModel.cs" />
     <Compile Include="Room\RoomViewModel.cs" />
-    <Compile Include="Shell\IShell.cs" />
     <Compile Include="Shell\ShellViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
