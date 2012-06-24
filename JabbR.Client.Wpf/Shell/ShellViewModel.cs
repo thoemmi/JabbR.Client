@@ -5,6 +5,7 @@ using JabbR.Client.Wpf.Events;
 using JabbR.Client.Wpf.Mdi;
 using JabbR.Client.Wpf.Room;
 using JabbR.Client.Wpf.TitleBar;
+using Message = JabbR.Client.Models.Message;
 
 namespace JabbR.Client.Wpf.Shell {
     public class ShellViewModel : Conductor<IScreen>, IShell {
@@ -34,16 +35,20 @@ namespace JabbR.Client.Wpf.Shell {
 
             _client = new JabbRClient(SERVER);
             _client.Connect(USERNAME, PASSWORD).ContinueWith(task => OnAfterConnect(task.Result));
+            _client.MessageReceived += ClientOnMessageReceived;
+        }
+
+        private void ClientOnMessageReceived(Message message, string room) {
+            _eventAggregator.Publish(new MessageReceivedEvent(room, message));
         }
 
         private void OnAfterConnect(LogOnInfo info) {
-            var userId = info.UserId;
             foreach (var room in info.Rooms) {
                 Console.WriteLine(room.Name);
                 Console.WriteLine(room.Private);
 
                 var roomView = _roomViewModelCreator();
-                roomView.DisplayName = room.Name;
+                roomView.SetName(room.Name);
                 _mdi.Open(roomView);
 
                 _client.GetRoomInfo(room.Name).ContinueWith(task => OnAfterGetRoomInfo(task.Result));
@@ -53,10 +58,6 @@ namespace JabbR.Client.Wpf.Shell {
         private void OnAfterGetRoomInfo(Models.Room room) {
             _eventAggregator.Publish(new RoomUpdatedEvent(room));
         }
-
-        //private void OnAfterGetRoomInfo(Room room) {
-        //    //Console.WriteLine(room.RecentMessages);
-        //}
 
         public TitleBarViewModel TitleBar {
             get { return _titleBar; }

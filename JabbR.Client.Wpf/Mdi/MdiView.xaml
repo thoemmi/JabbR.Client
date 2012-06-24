@@ -6,5 +6,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <TabControl x:Name="Items" TabStripPlacement="Left">
+        <TabControl.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding DisplayName}" FontWeight="Light" TextTrimming="CharacterEllipsis" MaxWidth="400">
+                        <TextBlock.ToolTip>
+                            <ToolTip Content="{Binding DisplayName}" />
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+                </StackPanel>
+            </DataTemplate>
+        </TabControl.ItemTemplate>
     </TabControl>
 </UserControl>
