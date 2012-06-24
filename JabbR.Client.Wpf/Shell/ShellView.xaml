@@ -25,15 +25,14 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+       
+        <ContentControl 
+            x:Name="TitleBar"/>
         
-        <ContentControl x:Name="TitleBar"/>
-        
-        <TextBlock Text="Hello Caliburn Micro!"
-                   Grid.Row="1"
-		           VerticalAlignment="Center"
-		           HorizontalAlignment="Center"
-		           FontSize="20" />
+        <ContentControl 
+            x:Name="Mdi"
+            Grid.Row="1"
+            />
     </Grid>
-
 </Window>
 
