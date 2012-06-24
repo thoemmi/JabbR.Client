@@ -74,6 +74,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Events\RoomUpdatedEvent.cs" />
     <Compile Include="Infrastructure\DragMoveWindowBehavior.cs" />
     <Compile Include="Mdi\MdiViewModel.cs" />
     <Compile Include="Room\RoomViewModel.cs" />
