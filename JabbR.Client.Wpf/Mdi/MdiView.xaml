@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro" mc:Ignorable="d" 
+             xmlns:Behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
+             xmlns:Room="clr-namespace:JabbR.Client.Wpf.Room" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <TabControl x:Name="Items" TabStripPlacement="Left" >
         <TabControl.Template>
@@ -30,14 +31,19 @@
             </ControlTemplate>
         </TabControl.Template>
         <TabControl.ItemTemplate>
-            <DataTemplate>
+            <DataTemplate DataType="Room:RoomViewModel">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding DisplayName}" FontWeight="Light" TextTrimming="CharacterEllipsis" MaxWidth="400">
-                        <TextBlock.ToolTip>
-                            <ToolTip Content="{Binding DisplayName}" />
-                        </TextBlock.ToolTip>
-                    </TextBlock>
+                    <TextBlock Text="{Binding DisplayName}" FontWeight="Light" TextTrimming="CharacterEllipsis" MaxWidth="400"/>
+                    <TextBlock Text="{Binding UnreadMessageCount, StringFormat={} ({0})}" FontWeight="Light" x:Name="unreadCount"/>
+                    <StackPanel.ToolTip>
+                        <ToolTip Content="{Binding Topic}" />
+                    </StackPanel.ToolTip>
                 </StackPanel>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding UnreadMessageCount}" Value="0">
+                        <Setter TargetName="unreadCount" Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
             </DataTemplate>
         </TabControl.ItemTemplate>
     </TabControl>
