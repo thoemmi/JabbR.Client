@@ -17,7 +17,7 @@ namespace JabbR.Client.Wpf {
 
         protected override void ConfigureContainer(ContainerBuilder builder) {
             base.ConfigureContainer(builder);
-            builder.RegisterAssemblyTypes(this.GetType().Assembly);
+            builder.RegisterAssemblyTypes(this.GetType().Assembly).Where(t => t.Name.EndsWith("ViewModel"));
         }
     }
 }
