@@ -34,8 +34,14 @@ namespace JabbR.Client.Wpf.Shell {
             base.OnInitialize();
 
             _client = new JabbRClient(SERVER);
-            _client.Connect(USERNAME, PASSWORD).ContinueWith(task => OnAfterConnect(task.Result));
             _client.MessageReceived += ClientOnMessageReceived;
+            _client.Connect(USERNAME, PASSWORD).ContinueWith(task => OnAfterConnect(task.Result));
+        }
+
+        protected override void OnDeactivate(bool close) {
+            base.OnDeactivate(close);
+            _client.Disconnect();
+            _client = null;
         }
 
         private void ClientOnMessageReceived(Message message, string room) {
